@@ -1,6 +1,6 @@
 {
   "name": "bb-plugin-codex-project-trust",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "engines": {
     "bb": ">=0.50.1",
@@ -10,7 +10,7 @@
     "name": "Codex Project Trust",
     "description": "Review and approve Codex project trust warnings in BB.",
     "branding": {
-      "icon": "ShieldCheck"
+      "icon": "./assets/icon.svg"
     },
     "server": "./server.ts",
     "app": "./app.tsx",

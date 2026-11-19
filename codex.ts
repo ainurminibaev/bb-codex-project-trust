@@ -37,7 +37,7 @@ export async function withCodex<T>(signal: AbortSignal, action: (request: Reques
   }
   try {
     await request("initialize", {
-      clientInfo: { name: "bb-codex-project-trust", version: "1.0.0" },
+      clientInfo: { name: "bb-codex-project-trust", version: "1.0.1" },
     });
     child.stdin.write(JSON.stringify({ jsonrpc: "2.0", method: "initialized" }) + "\n");
     return await action(request);

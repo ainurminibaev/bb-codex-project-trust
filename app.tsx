@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { definePluginApp, experimental_Icon as Icon, useRealtime, useRpc } from "@get-bb/plugin-sdk/app";
+import { definePluginApp, useRealtime, useRpc } from "@get-bb/plugin-sdk/app";
 import type { rpcContract, TrustPrompt } from "./contract.js";
 import "./app.css";
 
@@ -39,6 +39,15 @@ const strings = {
     failed: "Не удалось сохранить доверие к проекту.",
   },
 };
+
+function TrustGlyph({ trusted = false }: { trusted?: boolean }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2.8 20 6v5.4c0 4.3-3.3 7.7-8 9.8-4.7-2.1-8-5.5-8-9.8V6l8-3.2Z" />
+      {trusted ? <path d="m8.8 11.9 2.2 2.2 4.3-4.4" /> : <path d="M12 8v4m0 3v.1" />}
+    </svg>
+  );
+}
 
 function TrustCard({ threadId }: { threadId: string }) {
   const copy = navigator.language.startsWith("ru") ? strings.ru : strings.en;
@@ -87,10 +96,12 @@ function TrustCard({ threadId }: { threadId: string }) {
   if (saved) {
     return (
       <section className="bb-cpt bb-cpt--saved" aria-label={copy.saved}>
-        <span className="bb-cpt__icon" aria-hidden="true"><Icon name="ShieldCheck" /></span>
+        <span className="bb-cpt__icon" aria-hidden="true"><TrustGlyph trusted /></span>
         <div className="bb-cpt__body" role="status"><strong>{copy.saved}</strong><p>{copy.next}</p></div>
         <button className="bb-cpt__icon-button" aria-label={copy.close} onClick={() => { setPrompt(null); setSaved(false); setExpanded(false); refresh(); }}>
-          <Icon name="X" aria-hidden="true" />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+            <path d="m6 6 12 12M18 6 6 18" />
+          </svg>
         </button>
       </section>
     );
@@ -99,7 +110,7 @@ function TrustCard({ threadId }: { threadId: string }) {
   const ready = prompt.state === "ready";
   return (
     <section className="bb-cpt" aria-label={copy.title} aria-busy={saving}>
-      <span className="bb-cpt__icon" aria-hidden="true"><Icon name="ShieldAlert" /></span>
+      <span className="bb-cpt__icon" aria-hidden="true"><TrustGlyph /></span>
       <div className="bb-cpt__body">
         <strong>{copy.title}</strong>
         <p>{ready ? copy.intro : copy.unavailable}</p>
