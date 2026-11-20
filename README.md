@@ -1,3 +1,5 @@
+**English** · [Русский](README.ru.md)
+
 # Codex Project Trust for BB
 
 Review and approve Codex project trust from the thread that reported it. The card shows the project path, the machine running Codex, and the user configuration file that will be changed. The final **Trust project** button saves the decision through Codex's own App Server.
